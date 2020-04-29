@@ -1,0 +1,53 @@
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+site:
+  build: site
+  ports :
+   - "80:80"
+  volumes:
+   - /Users/arey/dev/mysite/www:/var/www/html/
+  links:
+   - database
+phpmyadmin:
+   image: corbinu/docker-phpmyadmin
+   ports :
+    - "8080:80"
+   environment:
+    - MYSQL_USERNAME=root
+    - MYSQL_PASSWORD=password
+   links:
+    - database:mysql
+database:
+  image: mysql:5.5
+  ports:
+   - "3306:3306"  
+  environment:
+     - MYSQL_ROOT_PASSWORD=password
+     - MYSQL_DATABASE=mysite
+     - MYSQL_USER=mysite
+     - MYSQL_PASSWORD=password
